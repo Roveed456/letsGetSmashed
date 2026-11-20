@@ -6,13 +6,16 @@ import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import ItemDetailPage from './pages/ItemDetailPage'
 import CartPage from './pages/CartPage'
+import CheckoutPage from './pages/CheckoutPage'
 import ContactPage from './pages/ContactPage'
 import AboutPage from './pages/AboutPage'
 
 const MIN_LOADER_TIME = 2200 // ms
 const MAX_LOADER_TIME = 5000 // ms
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const CREAM_PAGES = ['/cart', '/checkout', '/about']
+
+const wait =(ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 // resolves when the page and its images are loaded
 function pageIsLoaded() {
@@ -70,12 +73,13 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/menu/:itemId" element={<ItemDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/contact"element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<ItemDetailPage />} />
       </Routes>
-      {/* cart and about end with a cream section, the rest with white */}
-      <Footer edgeColor={pathname === '/cart' || pathname === '/about' ? '#ebd5a0' : '#ffffff'} />
+      {/* these pages end with a cream section, the rest with white */}
+      <Footer edgeColor={CREAM_PAGES.includes(pathname) ? '#ebd5a0' : '#ffffff'} />
     </div>
   )
 }

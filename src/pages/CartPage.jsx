@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import { useCart } from '../context/useCart'
@@ -65,7 +64,6 @@ function CartRow({ item }) {
 
 export default function CartPage() {
   const { items, count, subtotal, clearCart } = useCart()
-  const [checkoutMessage, setCheckoutMessage] = useState(false)
 
   return (
     <>
@@ -156,17 +154,12 @@ export default function CartPage() {
                   <span className="font-rowdies text-[28px] text-maroon">{toMoney(subtotal)}</span>
                 </div>
 
-                <button
-                  onClick={() => setCheckoutMessage(true)}
-                  className="mt-6 h-12 w-full rounded-lg bg-maroon font-rowdies text-[14px] uppercase tracking-[1px] text-white transition hover:scale-[1.02] hover:shadow-xl active:scale-95"
+                <Link
+                  to="/checkout"
+                  className="mt-6 flex h-12 w-full items-center justify-center rounded-lg bg-maroon font-rowdies text-[14px] uppercase tracking-[1px] text-white transition hover:scale-[1.02] hover:shadow-xl active:scale-95"
                 >
                   Checkout
-                </button>
-                {checkoutMessage && (
-                  <p role="status" className="mt-3 text-center text-[16px] text-[#585858]">
-                    Checkout is coming soon.
-                  </p>
-                )}
+                </Link>
 
                 <Link
                   to="/#menu"
