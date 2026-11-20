@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* colors and fonts */
+@theme {
+  --color-maroon: #871415;
+  --color-brand-orange: #fa9513;
+  --color-cream: #ebd5a0;
+  --color-peach: #f4c180;
+  --color-ink: #111418;
+
+  --font-rowdies: "Rowdies", sans-serif;
+  --font-roboto: "Roboto Condensed", sans-serif;
+  --font-bebas: "Bebas Neue", sans-serif;
+
+  /* animations */
+  --animate-fade-up: fade-up 0.8s ease-out both;
+  --animate-slide-down: slide-down 0.6s ease-out backwards; /* backwards on purpose, a leftover transform breaks the fixed mobile menu */
+  --animate-float: float 4s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+}
+
+/* reduce motion: animations become almost instant, not "none", because Swiper waits for transitionend */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-roboto);
+}
+
+/* pause animations while the loader is showing */
+.is-loading .animate-fade-up,
+.is-loading .animate-slide-down {
+  animation-play-state: paused;
+}
